@@ -15,8 +15,9 @@ typedef struct {
 void initBoard(Board * board, int row, int column);
 int getMaxColumns(Board * board);
 int getMaxRows(Board * board);
-void setCellState( Board * board, CellState newState);
-CellState getCellState();
-bool isValidPosition();
+void setCellState(Board * board, int row, int column, CellState newState);
+CellState getCellState(Board * board, int row, int column);
+bool isValidPosition(Board * board, int row, int column);
+int getAliveNeighbours(Board * board, int row, int column);
 
 #endif

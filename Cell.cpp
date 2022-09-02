@@ -14,3 +14,9 @@ CellState getState(Cell * cell)
 {
     return cell->state;
 }
+
+bool isAlive(Cell * cell)
+{
+    if ( ALIVE == cell->state) return true;
+    if ( DEAD == cell->state) return false;
+}

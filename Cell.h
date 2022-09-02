@@ -1,9 +1,9 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+#ifndef CELL_H_
+#define CELL_H_
 
 enum CellState {
-    Live,
-    Dead
+    LIVE,
+    DEAD
 };
 
 typedef struct {

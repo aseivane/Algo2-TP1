@@ -8,6 +8,9 @@
  */
 void initBoard(Board * board, int row, int column)
 {
+    board->maxColumn = MAXCOLUMN;
+    board->maxRow = MAXROW;
+    
     setCellState(board, row, column, ALIVE);
 }
 
@@ -24,7 +27,7 @@ int getMaxColumns(Board * board)
 /** @brief Returns the rows of the grid
  *
  *  @param board pointer to Board typedef
- *  @return -
+ *  @return int maxRows
  */
 int getMaxRows(Board * board)
 {
@@ -45,12 +48,12 @@ void setCellState(Board * board, int row, int column, CellState newState)
     setState( recivedCell , newState);
 }
 
-/** @brief Returns the message fields in a given matrix.
+/** @brief Returns cell state
  *
  *  @param board pointer to Board typedef
  *  @param row y coordinates
  *  @param column x coordinate
- *  @return cell
+ *  @return CellState
  */
 CellState getCellState(Board * board, int row, int column)
 {
@@ -58,12 +61,12 @@ CellState getCellState(Board * board, int row, int column)
     return getState( recivedCell );
 }
 
-/** @brief Returns the message fields in a given matrix.
+/** @brief Returs if indexs are related to a valid position
  *
  *  @param board pointer to Board typedef
  *  @param row y coordinates
  *  @param column x coordinate
- *  @return -
+ *  @return bool
  */
 bool isValidPosition(Board * board, int row, int column)
 {
@@ -77,20 +80,20 @@ bool isValidPosition(Board * board, int row, int column)
     }
 }
 
-/** @brief Returns the message fields in a given matrix.
+/** @brief Returns count of alive neighbours
  *
- *  @param ptrMessage pointer to the start of the message.
- *  @param ptrTalker pointer to the talker from wich get the message.
- *  @param fieldsArray matrix to copy the values
- *  @return -
+ *  @param board pointer to Board typedef
+ *  @param row y coordinates
+ *  @param column x coordinate
+ *  @return int alive neighbours
  */
-int getNeighbourCount(Board * board, int row, int column)
+int getAliveNeighbours(Board * board, int row, int column)
 {
     // aux variables
     int aliveCount = 0;
     Cell * ptrCurrentCell;
 
-    //run throgh the matrix 
+    // counts all the alive cells in the matrix
     for( int rowIndex = row - 1 ; rowIndex <= row + 1; rowIndex++)
     {
         for( int columnIndex = column - 1 ; columnIndex <= column + 1; columnIndex++)
@@ -105,7 +108,7 @@ int getNeighbourCount(Board * board, int row, int column)
         }
     }
 
-    //if the center cell is alive, substract from the total cont
+    // if the center cell is alive, substract from the total cont
     ptrCurrentCell = &(board->grid[row][column]);
 
     if( isAlive( ptrCurrentCell) )

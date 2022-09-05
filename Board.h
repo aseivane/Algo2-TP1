@@ -7,9 +7,10 @@ static const int MAXCOLUMN = 80;
 static const int MAXROW = 20;
 
 typedef struct {
-    int maxColumn = MAXCOLUMN;
-    int maxRow = MAXROW;
+    int maxColumn;
+    int maxRow;
     Cell grid[MAXROW][MAXCOLUMN];
+    int aliveCells;
 } Board;
 
 void initBoard(Board * board, int row, int column);

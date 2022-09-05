@@ -4,6 +4,13 @@
 #include "Game.h"
 #include "Interface.h"
 
+enum PlayerDecision {
+    PLAY_NEXT_ROUND,
+    RESTART_GAME,
+    END_GAME,
+    INVALID
+};
+
 enum MachineState {
     INITIALIZING,
     REQUESTING_DATA,
@@ -14,13 +21,14 @@ enum MachineState {
 typedef struct {
     MachineState currentState;
     Game lifeGame;
-
-
 } StateMachine ;
 
 void init(StateMachine * stateMachine);
-void run(StateMachine * stateMachine);
+void runCycle(StateMachine * stateMachine);
 bool isGameStillPlaying(StateMachine * stateMachine);
+void setMachineState(StateMachine * stateMachine, MachineState newState);
+PlayerDecision nextEvent();
 static void initializingState(StateMachine * stateMachine);
+static void requestingDataState(StateMachine * stateMachine);
 
 #endif

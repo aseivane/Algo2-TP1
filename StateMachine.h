@@ -27,8 +27,9 @@ void runCycle(StateMachine * stateMachine);
 bool isGameStillPlaying(StateMachine * stateMachine);
 void setMachineState(StateMachine * stateMachine, MachineState newState);
 PlayerDecision nextEvent();
+/*
 static void initializingState(StateMachine * stateMachine);
 static void requestingDataState(StateMachine * stateMachine);
 static void playingState(StateMachine * stateMachine);
-
+*/
 #endif

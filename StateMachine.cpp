@@ -1,62 +1,6 @@
 #include "StateMachine.h"
 #include "Interface.h"
 
-/** @brief Initialize the state machine with INITIALIZING state
- *
- *  @param stateMachine StateMachine pointer
- */
-void init(StateMachine * stateMachine)
-{
-    stateMachine->currentState = INITIALIZING;
-}
-
-/** @brief Runs throgh the state chart and executes the code inside the correspondig state
- *
- *  @param stateMachine StateMachine pointer
- */
-void runCycle(StateMachine * stateMachine)
-{
-    switch (stateMachine->currentState) 
-    {
-        case INITIALIZING:
-            // welcome and declarations befor game starts
-            initializingState( stateMachine );
-            stateMachine->currentState = REQUESTING_DATA;
-        break;
-
-        case REQUESTING_DATA:
-            // data reques for initial state of the came
-            requestingDataState(stateMachine);
-            stateMachine->currentState = PLAYING;
-        break;
-
-        case PLAYING:
-            // tasks to do on every game round
-            playingState(stateMachine);
-        break;
-
-        case ENDING:
-            break;
-    }
-}
-
-/** @brief Initialize the state machine with INITIALIZING state
- *
- *  @param stateMachine StateMachine pointer
- *  @return returns true or false answare of the questino
- */
-bool isGameStillPlaying( StateMachine * stateMachine )
-{
-    if (stateMachine->currentState == ENDING)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-    
-}
 
 /** @brief Initial state. It shows a welcome screen an inits the game typedef
  *          and whats inside it.
@@ -114,6 +58,63 @@ static void playingState(StateMachine * stateMachine)
     printStatistics( &(ptrGame->statistics) );
 }
 
+/** @brief Initialize the state machine with INITIALIZING state
+ *
+ *  @param stateMachine StateMachine pointer
+ */
+void init(StateMachine * stateMachine)
+{
+    stateMachine->currentState = INITIALIZING;
+}
+
+/** @brief Runs throgh the state chart and executes the code inside the correspondig state
+ *
+ *  @param stateMachine StateMachine pointer
+ */
+void runCycle(StateMachine * stateMachine)
+{
+    switch (stateMachine->currentState) 
+    {
+        case INITIALIZING:
+            // welcome and declarations befor game starts
+            initializingState( stateMachine );
+            stateMachine->currentState = REQUESTING_DATA;
+        break;
+
+        case REQUESTING_DATA:
+            // data reques for initial state of the came
+            requestingDataState(stateMachine);
+            stateMachine->currentState = PLAYING;
+        break;
+
+        case PLAYING:
+            // tasks to do on every game round
+            playingState(stateMachine);
+        break;
+
+        case ENDING:
+            break;
+    }
+}
+
+/** @brief Initialize the state machine with INITIALIZING state
+ *
+ *  @param stateMachine StateMachine pointer
+ *  @return returns true or false answare of the questino
+ */
+bool isGameStillPlaying( StateMachine * stateMachine )
+{
+    if (stateMachine->currentState == ENDING)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    
+}
+
 /** @brief The player is asked to decide if he/she wants to continue
  *          the game, restart it or end it.
  *
@@ -144,4 +145,9 @@ PlayerDecision nextEvent()
     }
 
     return decision;
+}
+
+void setMachineState(StateMachine * stateMachine, MachineState newState)
+{
+    stateMachine->currentState = newState;
 }

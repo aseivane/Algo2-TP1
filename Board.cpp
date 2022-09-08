@@ -6,12 +6,10 @@
  *  @param row y coordinates
  *  @param column x coordinate
  */
-void initBoard(Board * board, int row, int column)
+void initBoard(Board * board)
 {
     board->maxColumn = MAXCOLUMN;
     board->maxRow = MAXROW;
-    
-    setCellState(board, row, column, ALIVE);
 }
 
 /** @brief Returns the columns of the grid

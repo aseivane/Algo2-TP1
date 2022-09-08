@@ -13,7 +13,7 @@ typedef struct {
     int aliveCells;
 } Board;
 
-void initBoard(Board * board, int row, int column);
+void initBoard(Board * board);
 int getMaxColumns(Board * board);
 int getMaxRows(Board * board);
 void setCellState(Board * board, int row, int column, CellState newState);

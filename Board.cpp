@@ -114,3 +114,8 @@ int getAliveNeighbours(Board * board, int row, int column)
     
     return aliveCount;
 }
+
+bool cellIsAlive(Board * board, int row, int column)
+{
+    return isAlive( &(board->grid[row][column]) );
+}

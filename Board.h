@@ -14,11 +14,15 @@ typedef struct {
 } Board;
 
 void initBoard(Board * board);
+// getters
 int getMaxColumns(Board * board);
 int getMaxRows(Board * board);
-void setCellState(Board * board, int row, int column, CellState newState);
-CellState getCellState(Board * board, int row, int column);
-bool isValidPosition(Board * board, int row, int column);
 int getAliveNeighbours(Board * board, int row, int column);
+CellState getCellState(Board * board, int row, int column);
+//settes
+void setCellState(Board * board, int row, int column, CellState newState);
+
+bool isValidPosition(Board * board, int row, int column);
+bool cellIsAlive(Board * board, int row, int column);
 
 #endif

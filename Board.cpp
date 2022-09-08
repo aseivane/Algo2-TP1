@@ -1,6 +1,6 @@
 #include "Board.h"
 
-/** @brief initialize board
+/** @brief Initialize board
  *
  *  @param board pointer to Board typedef
  *  @param row y coordinates

@@ -19,4 +19,5 @@ bool isAlive(Cell * cell)
 {
     if ( ALIVE == cell->state) return true;
     if ( DEAD == cell->state) return false;
+    return false;
 }

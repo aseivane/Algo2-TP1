@@ -1,11 +1,19 @@
 #include "StateMachine.h"
 #include "Interface.h"
 
+/** @brief Initialize the state machine with INITIALIZING state
+ *
+ *  @param stateMachine StateMachine pointer
+ */
 void init(StateMachine * stateMachine)
 {
     stateMachine->currentState = INITIALIZING;
 }
 
+/** @brief Runs throgh the state chart and executes the code inside the correspondig state
+ *
+ *  @param stateMachine StateMachine pointer
+ */
 void runCycle(StateMachine * stateMachine)
 {
     switch (stateMachine->currentState) 
@@ -32,6 +40,11 @@ void runCycle(StateMachine * stateMachine)
     }
 }
 
+/** @brief Initialize the state machine with INITIALIZING state
+ *
+ *  @param stateMachine StateMachine pointer
+ *  @return returns true or false answare of the questino
+ */
 bool isGameStillPlaying( StateMachine * stateMachine )
 {
     if (stateMachine->currentState == ENDING)
@@ -45,7 +58,12 @@ bool isGameStillPlaying( StateMachine * stateMachine )
     
 }
 
-void initializingState( StateMachine * stateMachine )
+/** @brief Initial state. It shows a welcome screen an inits the game typedef
+ *          and whats inside it.
+ *
+ *  @param stateMachine StateMachine pointer
+ */
+static void initializingState( StateMachine * stateMachine )
 {
     initialScreen();
 
@@ -53,6 +71,11 @@ void initializingState( StateMachine * stateMachine )
     initGame( &(stateMachine->lifeGame) );
 }
 
+/** @brief Input data state. The player enters the amount of alive cells
+ *          that are going to be placed initialy and the position of each one.
+ *
+ *  @param stateMachine StateMachine pointer
+ */
 static void requestingDataState( StateMachine * stateMachine )
 {
     int rowIndex = 0;
@@ -74,6 +97,11 @@ static void requestingDataState( StateMachine * stateMachine )
     }
 }
 
+/** @brief Playing state. The game runs all the changes in one round according
+ *          to the game rules.
+ *
+ *  @param stateMachine StateMachine pointer
+ */
 static void playingState(StateMachine * stateMachine)
 {
     Game * ptrGame = &(stateMachine->lifeGame);
@@ -86,6 +114,12 @@ static void playingState(StateMachine * stateMachine)
     printStatistics( &(ptrGame->statistics) );
 }
 
+/** @brief The player is asked to decide if he/she wants to continue
+ *          the game, restart it or end it.
+ *
+ *  @param -
+ *  @return PlayerDecision
+ */
 PlayerDecision nextEvent()
 {
     int answer = askNextStep();

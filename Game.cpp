@@ -25,6 +25,8 @@ void playRound( Game * game )
     static const int maxCols = getMaxColumns( game->actualBoard);
     int aliveNeighbours;
 
+    clearLastRoundStat( &(game->statistics) );
+
     // run through the matrix looking for changes
     for( int rowIndex; rowIndex < maxRows ; rowIndex++)
     {

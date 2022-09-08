@@ -1,8 +1,5 @@
-#include <iostream>
 #include "main.h"
 #include "StateMachine.h"
-
-using namespace std;
 
 void main() 
 {

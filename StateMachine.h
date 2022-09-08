@@ -2,7 +2,6 @@
 #define STATEMACHINE_H_
 
 #include "Game.h"
-#include "Interface.h"
 
 enum PlayerDecision {
     PLAY_NEXT_ROUND,
@@ -30,5 +29,6 @@ void setMachineState(StateMachine * stateMachine, MachineState newState);
 PlayerDecision nextEvent();
 static void initializingState(StateMachine * stateMachine);
 static void requestingDataState(StateMachine * stateMachine);
+static void playingState(StateMachine * stateMachine);
 
 #endif

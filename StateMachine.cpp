@@ -48,6 +48,9 @@ bool isGameStillPlaying( StateMachine * stateMachine )
 void initializingState( StateMachine * stateMachine )
 {
     initialScreen();
+
+    //the game is initialized
+    initGame( &(stateMachine->lifeGame) );
 }
 
 static void requestingDataState( StateMachine * stateMachine )
@@ -58,8 +61,7 @@ static void requestingDataState( StateMachine * stateMachine )
     //ask for alive cells to place
     int initialCells = askAmountOfAliveCells();
 
-    //the game is initialized
-    initGame( &(stateMachine->lifeGame) , initialCells);
+    setInitialCells( &(stateMachine->lifeGame), initialCells);
 
     for( initialCells; initialCells > 0; initialCells--)
     {
@@ -74,11 +76,14 @@ static void requestingDataState( StateMachine * stateMachine )
 
 static void playingState(StateMachine * stateMachine)
 {
-    playRound( &(stateMachine->lifeGame) );
+    Game * ptrGame = &(stateMachine->lifeGame);
+    playRound( ptrGame );
 
-    getStatistics( &(stateMachine->lifeGame) );
+    //getStatistics( ptrGame );
 
-    printGameScreen( &(stateMachine->lifeGame) );
+    printBoard( ptrGame->actualBoard );
+
+    printStatistics( &(ptrGame->statistics) );
 }
 
 PlayerDecision nextEvent()

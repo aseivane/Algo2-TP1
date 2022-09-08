@@ -1,7 +1,7 @@
 #include "main.h"
 #include "StateMachine.h"
 
-void main() 
+int main() 
 {
 	StateMachine mainProgram;
 	PlayerDecision decisionSelected;
@@ -17,7 +17,10 @@ void main()
 		/* after the code inside the state is executed, asks for
 		* an external event to decide the next step 
 		*/
-		decisionSelected = nextEvent();
+		if(PLAYING == mainProgram.currentState ) 
+		{
+			decisionSelected = nextEvent();
+		}
 		
 		/* if the player decides to restar the game, the machine
 		* goes to the initial state and repeats the process

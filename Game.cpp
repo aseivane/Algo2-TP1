@@ -1,9 +1,46 @@
 #include "Game.h"
 
+static bool cellShouldDie( int aliveNeighbours)
+{
+    static const int twoNeighbours = 2;
+    static const int threeNeighbours = 3;
+    // overpopuleted
+    if( aliveNeighbours > threeNeighbours) return true;
+    // alone
+    if( aliveNeighbours < twoNeighbours) return true;
+
+    return false;
+}
+
+static bool cellShouldBorn( int aliveNeighbours)
+{
+    // exactly 3 neighbours
+    static const int threeNeighbours = 3;
+    if( aliveNeighbours == threeNeighbours) return true;
+
+    return false;
+}
+
+static void killCell( Game * game, int rowIndex, int columnIndex )
+{
+    setCellState( game->auxBoard, rowIndex, columnIndex, DEAD);
+}
+
+static void bornCell( Game * game, int rowIndex, int columnIndex )
+{
+    setCellState( game->auxBoard, rowIndex, columnIndex, ALIVE);
+}
+
+static void swapBoards( Game * game )
+{
+    Board * auxPtr = game->actualBoard;
+    game->actualBoard = game->auxBoard;
+    game->auxBoard = auxPtr;
+}
+
 void initGame( Game * game)
 {
     // asign boards
-    game->state = NOT_STARTED;
     game->actualBoard = &(game->board1);
     game->auxBoard = &(game->board2);
 
@@ -28,9 +65,9 @@ void playRound( Game * game )
     clearLastRoundStat( &(game->statistics) );
 
     // run through the matrix looking for changes
-    for( int rowIndex; rowIndex < maxRows ; rowIndex++)
+    for( int rowIndex = 0; rowIndex < maxRows ; rowIndex++)
     {
-        for( int colIndex; colIndex < maxRows ; colIndex++)
+        for( int colIndex = 0; colIndex < maxCols ; colIndex++)
         {
             // get the alive neighbours of the cell to decide the future of the cell
             aliveNeighbours = getAliveNeighbours( game->actualBoard, rowIndex, colIndex);
@@ -90,43 +127,4 @@ Statistics getStatistics( Game * game )
 void setAliveCell( Game * game, int rowIndex, int columnIndex )
 {
     setCellState( game->actualBoard, rowIndex, columnIndex, ALIVE);
-}
-
-
-static bool cellShouldDie( int aliveNeighbours)
-{
-    static const int twoNeighbours = 2;
-    static const int threeNeighbours = 3;
-    // overpopuleted
-    if( aliveNeighbours > threeNeighbours) return true;
-    // alone
-    if( aliveNeighbours < twoNeighbours) return true;
-
-    return false;
-}
-
-static bool cellShouldBorn( int aliveNeighbours)
-{
-    // exactly 3 neighbours
-    static const int threeNeighbours = 3;
-    if( aliveNeighbours == threeNeighbours) return true;
-
-    return false;
-}
-
-static void killCell( Game * game, int rowIndex, int columnIndex )
-{
-    setCellState( game->auxBoard, rowIndex, columnIndex, DEAD);
-}
-
-static void bornCell( Game * game, int rowIndex, int columnIndex )
-{
-    setCellState( game->auxBoard, rowIndex, columnIndex, ALIVE);
-}
-
-static void swapBoards( Game * game )
-{
-    Board * auxPtr = game->actualBoard;
-    game->actualBoard = game->auxBoard;
-    game->auxBoard = auxPtr;
 }

@@ -1,5 +1,17 @@
 #include "Board.h"
 
+static void clearBoard( Board * board )
+{
+    // run through clearing cells
+    for( int rowIndex = 0; rowIndex < board->maxRow ; rowIndex++)
+    {
+        for( int colIndex = 0; colIndex < board->maxColumn ; colIndex++)
+        {
+            setState( &(board->grid[rowIndex][colIndex]), DEAD);
+        }
+    }
+}
+
 /** @brief Initialize board
  *
  *  @param board pointer to Board typedef
@@ -10,6 +22,7 @@ void initBoard(Board * board)
 {
     board->maxColumn = MAXCOLUMN;
     board->maxRow = MAXROW;
+    clearBoard( board );
 }
 
 /** @brief Returns the columns of the grid

@@ -1,5 +1,7 @@
 #ifndef INTERFACE_H_
-#define INTERFACE_H_
+#define INTERFACE_H
+
+#include "Game.h"
 
 void initialScreen();
 int askAmountOfAliveCells();

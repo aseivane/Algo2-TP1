@@ -11,23 +11,25 @@ void initialScreen()
 int askAmountOfAliveCells()
 {
     int cells;
-    cout << "Cantidad de celulas a configurar:" << endl;
+    cout << "Cantidad de celulas a configurar: ";
     cin >> cells;
+    cout << endl;
     return cells;
 }
 
 int askRowIndex()
 {
     int rowIndex;
-    cout << "Fila:" << endl;
+    cout << "Fila: ";
     cin >> rowIndex;
     return rowIndex;
 }
 int askColumnIndex()
 {
     int colIndex;
-    cout << "Columna:" << endl;
+    cout << "Columna: ";
     cin >> colIndex;
+    cout  << endl;
     return colIndex;
 }
 int askNextStep()
@@ -44,9 +46,32 @@ int askNextStep()
 
 void printBoard( Board * board )
 {
+    static const int maxRows = getMaxRows( board);
+    static const int maxCols = getMaxColumns( board);
 
+    // run through the matrix looking for changes
+    for( int rowIndex = 0; rowIndex < maxRows ; rowIndex++)
+    {
+        for( int colIndex = 0; colIndex < maxCols ; colIndex++)
+        {
+            if( cellIsAlive( board, rowIndex, colIndex ) )
+            {
+                cout<<1;
+            }
+            else
+            {
+                cout<<0;
+            }
+        }
+        cout<<endl;
+    }
 }
+
 void printStatistics( Statistics * statistics )
 {
-
+    cout<<"Celulas vivas: " << statistics->aliveCells<<endl;
+    cout<<"Celulas nacidad en el ultimo turno: "<< statistics->lastRoundNewbornCells <<endl;
+    cout<<"Celulas muertas en el ultimo turno: "<< statistics->lastRoundDeadCells <<endl;
+    cout<<"Promedio de nacimientos: " << statistics->avgBorns << endl;
+    cout<<"Promedio de muertes: " << statistics->avgDeaths << endl <<endl;
 }

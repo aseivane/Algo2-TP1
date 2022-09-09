@@ -30,15 +30,16 @@ static void requestingDataState( StateMachine * stateMachine )
 
     setInitialCells( &(stateMachine->lifeGame), initialCells);
 
-    for( initialCells; initialCells > 0; initialCells--)
+    for( ; initialCells > 0; initialCells--)
     {
         //ask coordinate for each cell
-        rowIndex = askRowIndex();
-        columnIndex = askColumnIndex();
+        rowIndex = askRowIndex() - 1;
+        columnIndex = askColumnIndex() - 1;
 
         //set it on the game
         setAliveCell( &(stateMachine->lifeGame), rowIndex, columnIndex );
     }
+    printBoard( stateMachine->lifeGame.actualBoard );
 }
 
 /** @brief Playing state. The game runs all the changes in one round according
@@ -127,15 +128,15 @@ PlayerDecision nextEvent()
     PlayerDecision decision;
     switch (answer) 
     {
-        case 0:
+        case 1:
             decision = PLAY_NEXT_ROUND;
         break;
 
-        case 1:
+        case 2:
             decision = RESTART_GAME;
         break;
 
-        case 2:
+        case 3:
             decision = END_GAME;
         break;
 

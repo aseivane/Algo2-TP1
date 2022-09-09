@@ -4,7 +4,7 @@
 #include "Game.h"
 
 enum PlayerDecision {
-    PLAY_NEXT_ROUND,
+    PLAY_NEXT_ROUND = 1,
     RESTART_GAME,
     END_GAME,
     INVALID

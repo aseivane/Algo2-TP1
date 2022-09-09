@@ -20,8 +20,8 @@ void initStatistics( Statistics * statistics)
  */
 void updateStatistics( Statistics * statistics)
 {
-    static const int newBorns = statistics->lastRoundNewbornCells;
-    static const int newDeaths = statistics->lastRoundDeadCells;
+    const int newBorns = statistics->lastRoundNewbornCells;
+    const int newDeaths = statistics->lastRoundDeadCells;
     statistics->aliveCells = statistics->aliveCells + newBorns - newDeaths;
 
     statistics->round++;

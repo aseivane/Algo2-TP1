@@ -84,6 +84,12 @@ void playRound( Game * game )
                     //add it to the statistics
                     newDeathStat( &(game->statistics) );
                 }
+                else
+                {
+                    // if it's alive, set it on the aux board
+                    setCellState( game->auxBoard, rowIndex, colIndex, ALIVE);
+                }
+                
             }
             // if it's not alive, is dead
             else
@@ -96,6 +102,11 @@ void playRound( Game * game )
 
                     //add it to the statistics
                     newBornStat( &(game->statistics) );
+                }
+                else
+                {
+                    // if it's dead, set it on the aux board
+                    setCellState( game->auxBoard, rowIndex, colIndex, DEAD);
                 }
             }
         }

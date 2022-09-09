@@ -21,13 +21,14 @@ int main()
 		{
 			decisionSelected = nextEvent();
 		}
-		
+
 		/* if the player decides to restar the game, the machine
 		* goes to the initial state and repeats the process
 		*/
 		if( decisionSelected == RESTART_GAME)
 		{
 			setMachineState( &mainProgram, INITIALIZING);
+			decisionSelected = INVALID;
 		}
 
 		/* if the player decides to end the game,
@@ -40,4 +41,5 @@ int main()
 
 	}while ( isGameStillPlaying( &mainProgram ) ); // if the state is endig, exit the loop
 	
+	return 0;
 }

@@ -20,14 +20,14 @@ int askAmountOfAliveCells()
 int askRowIndex()
 {
     int rowIndex;
-    cout << "Fila: ";
+    cout << "Fila (1 - 20): ";
     cin >> rowIndex;
     return rowIndex;
 }
 int askColumnIndex()
 {
     int colIndex;
-    cout << "Columna: ";
+    cout << "Columna (1 - 80): ";
     cin >> colIndex;
     cout  << endl;
     return colIndex;
@@ -56,11 +56,11 @@ void printBoard( Board * board )
         {
             if( cellIsAlive( board, rowIndex, colIndex ) )
             {
-                cout<<1;
+                cout<<"x|";
             }
             else
             {
-                cout<<0;
+                cout<<"0|";
             }
         }
         cout<<endl;
